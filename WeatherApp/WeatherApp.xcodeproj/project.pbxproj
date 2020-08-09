@@ -44,6 +44,7 @@
 		5FB6F396C7B4D8565A17BA4F /* Pods_WeatherApp_WeatherAppUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WeatherApp_WeatherAppUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		807887DDD8AA71E32BCA3549 /* Pods-WeatherApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherApp.release.xcconfig"; path = "Target Support Files/Pods-WeatherApp/Pods-WeatherApp.release.xcconfig"; sourceTree = "<group>"; };
 		C17819A56510857DF79AC691 /* Pods-WeatherAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherAppTests.release.xcconfig"; path = "Target Support Files/Pods-WeatherAppTests/Pods-WeatherAppTests.release.xcconfig"; sourceTree = "<group>"; };
+		C764CB1D24DFBA0800CCCB02 /* APIKeys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = APIKeys.plist; path = "/Users/maximohinojosa/take-home-project/WeatherApp/WeatherApp/APIKeys.plist"; sourceTree = "<absolute>"; };
 		C7AFD64B24DC75150029060D /* WeatherApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7AFD64E24DC75150029060D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = ../AppDelegate.swift; sourceTree = "<group>"; };
 		C7AFD65024DC75150029060D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SceneDelegate.swift; path = ../SceneDelegate.swift; sourceTree = "<group>"; };
@@ -142,6 +143,7 @@
 				C7AFD65424DC75150029060D /* Main.storyboard */,
 				C7AFD65724DC751C0029060D /* Assets.xcassets */,
 				C7AFD65924DC751C0029060D /* LaunchScreen.storyboard */,
+				C764CB1D24DFBA0800CCCB02 /* APIKeys.plist */,
 				C7AFD65C24DC751C0029060D /* Info.plist */,
 			);
 			path = WeatherApp;
