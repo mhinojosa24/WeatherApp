@@ -30,7 +30,7 @@ class WeatherForecastViewModel: NSObject {
     
     // MARK: - Class Properties
     private var locationManager = CLLocationManager()
-    private var userLocation: CLLocation!
+    var userLocation: CLLocation!
     weak var delegate: LocationUpdateDelegate?
     var currentWeather: CurrentWeather!
     var dailyWeather: [DailyWeather] = []
@@ -56,8 +56,10 @@ class WeatherForecastViewModel: NSObject {
     
     
     /// NOTE:  This function fetches the weather forcast from OpenWeatherMap.orgt
-    func fetchWeather(completion: @escaping () -> Void) {
-        WeatherService.shared.fetchWeather(with: userLocation.coordinate.latitude, long: userLocation.coordinate.longitude) { (response) in
+    func fetchWeather(location: CLLocation, completion: @escaping () -> Void) {
+        getCityName(location: userLocation)
+        WeatherService.shared.fetchWeather(with: location.coordinate.latitude, long: location.coordinate.longitude) { (response) in
+            print(response.current)
             self.currentWeather = response.current
             self.dailyWeather = response.daily
             self.locationManager.stopUpdatingLocation()

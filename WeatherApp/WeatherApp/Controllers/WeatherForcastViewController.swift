@@ -13,7 +13,7 @@ class WeatherForecastViewController: UIViewController, LocationUpdateDelegate {
 
     // MARK: - Class Properties
     @IBOutlet weak var tableView: UITableView?
-    fileprivate let viewModel = WeatherForecastViewModel()
+    let viewModel = WeatherForecastViewModel()
     
     
     override func viewDidLoad() {
@@ -22,24 +22,15 @@ class WeatherForecastViewController: UIViewController, LocationUpdateDelegate {
         viewModel.delegate = self
         viewModel.checkLocationServices()
         configureTableView()
+        reloadSections()
+        refreshWeatherData()
+        
     }
 
 
     // MARK: - Class Methods
 
     func configureTableView() {
-        self.viewModel.reloadSections = { [weak self] (section: Int) in
-            self?.tableView?.beginUpdates()
-            self?.tableView?.reloadSections([section], with: .fade)
-            self?.tableView?.endUpdates()
-        }
-        
-        tableView?.cr.addHeadRefresh(animator: NormalFooterAnimator(), handler: { [weak self] in
-            self?.viewModel.startUpdatingLocation()
-            self?.viewModel.fetchWeather(completion: {
-                self?.tableView?.cr.endHeaderRefresh()
-            })
-        })
         tableView?.register(WeatherHeaderView.nib, forHeaderFooterViewReuseIdentifier: WeatherHeaderView.identifier)
         tableView?.register(WeatherTimeCell.nib, forCellReuseIdentifier: WeatherTimeCell.identifier)
         tableView?.register(WeatherDescriptionCell.nib, forCellReuseIdentifier: WeatherDescriptionCell.identifier)
@@ -48,6 +39,26 @@ class WeatherForecastViewController: UIViewController, LocationUpdateDelegate {
         tableView?.dataSource = viewModel
         tableView?.separatorStyle = .none
         tableView?.allowsSelection = false
+    }
+    
+    func reloadSections() {
+        self.viewModel.reloadSections = { [weak self] (section: Int) in
+            self?.tableView?.beginUpdates()
+            self?.tableView?.reloadSections([section], with: .fade)
+            self?.tableView?.endUpdates()
+        }
+    }
+    
+    func refreshWeatherData() {
+        tableView?.cr.addHeadRefresh(animator: NormalFooterAnimator(), handler: { [weak self] in
+            self?.viewModel.startUpdatingLocation()
+            guard let locaiton = self?.viewModel.userLocation else { return }
+            self?.viewModel.fetchWeather(location: locaiton, completion: {
+                print("** Refreshed **")
+                self?.tableView?.reloadData()
+                self?.tableView?.cr.endHeaderRefresh()
+            })
+        })
     }
     
     func locationError(error: LocationError) {
