@@ -64,7 +64,7 @@
 		C765C58E24DFD18E00E95E9B /* WeatherForcastViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherForcastViewModel.swift; sourceTree = "<group>"; };
 		C775180C24E12885009246D9 /* UIImageView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Ext.swift"; sourceTree = "<group>"; };
 		C775181524E1FAE3009246D9 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
-		C789F2CC24E2839100335886 /* weather.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = weather.gif; path = ../../../Downloads/weather.gif; sourceTree = "<group>"; };
+		C789F2CC24E2839100335886 /* weather.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = weather.gif; sourceTree = "<group>"; };
 		C789F2D224E321C400335886 /* LaunchScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenViewController.swift; sourceTree = "<group>"; };
 		C7944D6E24E35AA4003B24EB /* WeatherTimeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherTimeCell.swift; sourceTree = "<group>"; };
 		C7944D6F24E35AA4003B24EB /* WeatherTimeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WeatherTimeCell.xib; sourceTree = "<group>"; };
