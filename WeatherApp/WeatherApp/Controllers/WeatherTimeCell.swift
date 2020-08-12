@@ -30,10 +30,13 @@ class WeatherTimeCell: UITableViewCell {
     }
     
     // MARK: - Class Methods
-    func configure(with currentWeather: CurrentWeather, dailyWeather: [DailyWeather], _ isCurrentWeather: Bool ) {
+    func configure(with indexPath: Int, currentWeather: CurrentWeather, dailyWeather: [DailyWeather], _ isCurrentWeather: Bool ) {
         if isCurrentWeather {
             sunriseTimeTitle.text = currentWeather.sunrise.convertUnixToTime()
             sunsetTimeTitle.text = currentWeather.sunset.convertUnixToTime()
+        } else {
+            sunriseTimeTitle.text = dailyWeather[indexPath].sunrise.convertUnixToTime()
+            sunsetTimeTitle.text = dailyWeather[indexPath].sunset.convertUnixToTime()
         }
     }
 }

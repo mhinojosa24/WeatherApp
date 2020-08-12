@@ -30,9 +30,7 @@ class WeatherDescriptionCell: UITableViewCell {
     
     // MARK: - Class Methods
     func configure(with indexPath: Int, currentWeather: CurrentWeather, dailyWeather: [DailyWeather], _ isCurrentWeather: Bool) {
-        if !isCurrentWeather {
-            descriptionTitle.text = "\(dailyWeather[indexPath].weather[0].description)"
-            windSpeedTitle.text = "\(Int(dailyWeather[indexPath].windSpeed)) mph"
-        }
+        descriptionTitle.text = "\(dailyWeather[indexPath].weather[0].description)"
+        windSpeedTitle.text = "\(Int(dailyWeather[indexPath].windSpeed)) mph"
     }
 }
