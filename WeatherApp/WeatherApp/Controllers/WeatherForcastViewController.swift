@@ -35,8 +35,8 @@ class WeatherForecastViewController: UIViewController, LocationUpdateDelegate {
         }
         
         tableView?.cr.addHeadRefresh(animator: NormalFooterAnimator(), handler: { [weak self] in
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
-                /// Stop refresh when your job finished, it will reset refresh footer if completion is true
+            self?.viewModel.startUpdatingLocation()
+            self?.viewModel.fetchWeather(completion: {
                 self?.tableView?.cr.endHeaderRefresh()
             })
         })

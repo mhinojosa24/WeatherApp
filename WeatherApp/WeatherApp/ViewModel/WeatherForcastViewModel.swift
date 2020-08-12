@@ -30,6 +30,7 @@ class WeatherForecastViewModel: NSObject {
     
     // MARK: - Class Properties
     private var locationManager = CLLocationManager()
+    private var userLocation: CLLocation!
     weak var delegate: LocationUpdateDelegate?
     var currentWeather: CurrentWeather!
     var dailyWeather: [DailyWeather] = []
@@ -53,8 +54,16 @@ class WeatherForecastViewModel: NSObject {
         return locationManager.startUpdatingLocation()
     }
     
-    func stopUpdatingLocation() {
-        return locationManager.stopUpdatingLocation()
+    
+    /// NOTE:  This function fetches the weather forcast from OpenWeatherMap.orgt
+    func fetchWeather(completion: @escaping () -> Void) {
+        WeatherService.shared.fetchWeather(with: userLocation.coordinate.latitude, long: userLocation.coordinate.longitude) { (response) in
+            self.currentWeather = response.current
+            self.dailyWeather = response.daily
+            self.locationManager.stopUpdatingLocation()
+            self.delegate?.weatherDidUpdate(isUpdated: true)
+            completion()
+        }
     }
     
     /**
@@ -117,9 +126,10 @@ extension WeatherForecastViewModel: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
-        let location = locations.last! as CLLocation
-        getCityName(location: location)
-        WeatherService.shared.fetchWeather(with: location.coordinate.latitude, long: location.coordinate.longitude) { (response) in
+        userLocation = locations.last! as CLLocation
+        
+        getCityName(location: userLocation)
+        WeatherService.shared.fetchWeather(with: userLocation.coordinate.latitude, long: userLocation.coordinate.longitude) { (response) in
             self.currentWeather = response.current
             self.dailyWeather = response.daily
             self.locationManager.stopUpdatingLocation()
