@@ -17,18 +17,18 @@ struct Temperature: Codable {
 }
 
 struct DailyWeather: Codable {
-    var dt: Int
-    var sunrise: Int
-    var sunset: Int
+    var dt: Double
+    var sunrise: Double
+    var sunset: Double
     var temp: Temperature
     var windSpeed: Double
     var weather: [Weather]
 }
 
-class CurrentWeather: Codable {
-    var dt: Int
-    var sunrise: Int
-    var sunset: Int
+struct CurrentWeather: Codable {
+    var dt: Double
+    var sunrise: Double
+    var sunset: Double
     var temp: Double
     var windSpeed: Double
     var weather: [Weather]

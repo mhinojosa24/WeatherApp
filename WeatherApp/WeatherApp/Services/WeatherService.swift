@@ -11,15 +11,28 @@ import Alamofire
 
 class WeatherService {
     
-    // - MARK:  Class Properties
+    // MARK: - Class Properties
     static let shared = WeatherService()
     
-    
-    // - MARK: Class Functions
+    // MARK: - Class Methods
     
     /**
-     This function fetches the weather forcast from OpenWeatherMap.org
-     
+     NOTE: This function fetches the current weather icon from OpenWeatherMap.org
+    **Parameters:**
+        - url: URL
+     */
+    func fetchImage(with url: URL, completion: @escaping (Data?) -> Void) {
+        AF.request(url).responseData { (response) in
+            if let error = response.error {
+                print(error.localizedDescription)
+            } else {
+                completion(response.data)
+            }
+        }
+    }
+    
+    /**
+     NOTE: This function fetches the weather forcast from OpenWeatherMap.org
     **Parameters:**
         - lat: latitude
         - long: longitude
@@ -36,7 +49,6 @@ class WeatherService {
                 decoder.keyDecodingStrategy = .convertFromSnakeCase
                 do {
                     let weatherData = try decoder.decode(WeatherResponse.self, from: response.data!)
-                
                     completion(weatherData)
                 } catch {
                     print(error.localizedDescription)
@@ -45,10 +57,8 @@ class WeatherService {
         }
     }
     
-    
     /**
-     This funciton returns a url string.
-     
+     NOTE: This funciton returns a url string.
     **Parameters:**
         - lat: latitude
         - long: longitude
@@ -56,14 +66,13 @@ class WeatherService {
     private func getURL(with lat: Double, long: Double) -> String? {
         let apiKey: String = getApiKey()
     
-        guard let url = URL(string: "https://api.openweathermap.org/data/2.5/onecall?lat=\(lat)&lon=\(long)&exclude=minutely,hourly&appid=\(apiKey)") else { return nil }
+        guard let url = URL(string: "https://api.openweathermap.org/data/2.5/onecall?lat=\(lat)&lon=\(long)&units=imperial&appid=\(apiKey)") else { return nil }
         
         return url.absoluteString
     }
-    
-    
+
     /**
-     This funciton returns clients api key
+     NOTE: This funciton returns clients api key
      */
     private func getApiKey() -> String {
         let filePath = Bundle.main.path(forResource: "ApiKeys", ofType: "plist")
